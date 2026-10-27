@@ -6,6 +6,11 @@ Required:
     - justification
     - principal_id
     - role_definition_id
+Optional:
+    - timeouts (block):
+        - create (optional)
+        - delete (optional)
+        - read (optional)
 EOT
 
   type = map(object({
@@ -13,6 +18,11 @@ EOT
     justification      = string
     principal_id       = string
     role_definition_id = string
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+    }))
   }))
   validation {
     condition = alltrue([

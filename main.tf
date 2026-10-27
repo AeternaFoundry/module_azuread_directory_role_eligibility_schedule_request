@@ -5,5 +5,14 @@ resource "azuread_directory_role_eligibility_schedule_request" "directory_role_e
   justification      = each.value.justification
   principal_id       = each.value.principal_id
   role_definition_id = each.value.role_definition_id
+
+  dynamic "timeouts" {
+    for_each = each.value.timeouts != null ? [each.value.timeouts] : []
+    content {
+      create = timeouts.value.create
+      delete = timeouts.value.delete
+      read   = timeouts.value.read
+    }
+  }
 }
 
